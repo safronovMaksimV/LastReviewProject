@@ -3,11 +3,31 @@ package com.lrp.home.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.lrp.base.modules.IoDispatcher
+import com.lrp.domain.usecases.DogsUseCase
+import com.lrp.domain.utils.map
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    @IoDispatcher val ioDispatcher: CoroutineDispatcher,
+    private val dogsUseCase: DogsUseCase,
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    init {
+        viewModelScope.launch(ioDispatcher) {
+
+            dogsUseCase.getRandomDog().collect {
+                Timber.e("SOME PHOTO: $it")
+                it.map { response ->
+                    Timber.e("BODY: ${response.body()}")
+                }
+            }
+        }
     }
-    val text: LiveData<String> = _text
 }

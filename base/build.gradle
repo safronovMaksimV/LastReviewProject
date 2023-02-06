@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -38,11 +40,21 @@ dependencies {
     implementation(libs.room.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.material)
+    implementation(libs.androidx.lifecycle.viewModel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.junit4)
+    kapt(libs.dagger.compiler)
     implementation(libs.hilt.android)
-    implementation(libs.hilt.compiler)
 
     implementation(libs.androidx.test.ext)
     implementation(libs.androidx.test.espresso.core)
+}
+
+kapt {
+    correctErrorTypes true
 }

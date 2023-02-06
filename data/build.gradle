@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -41,7 +43,7 @@ dependencies {
     implementation(libs.androidx.material)
     implementation(libs.junit4)
     implementation(libs.hilt.android)
-    implementation(libs.hilt.compiler)
+    kapt(libs.dagger.compiler)
     implementation(libs.retrofit.core)
     implementation(libs.okhttp.logging)
     implementation(libs.moshi)
@@ -50,4 +52,8 @@ dependencies {
 
     implementation(libs.androidx.test.ext)
     implementation(libs.androidx.test.espresso.core)
+}
+
+kapt {
+    correctErrorTypes true
 }

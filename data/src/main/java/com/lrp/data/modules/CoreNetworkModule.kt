@@ -3,6 +3,7 @@ package com.lrp.data.modules
 import androidx.viewbinding.BuildConfig
 import com.lrp.base.utils.Constants
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -49,6 +50,7 @@ object CoreNetworkModule {
     @Provides
     @Reusable
     fun providesMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
         .build()
 
     @Provides

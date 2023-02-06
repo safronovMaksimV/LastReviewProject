@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -28,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -37,7 +42,18 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.material)
     implementation(libs.junit4)
+    implementation(libs.hilt.android)
+    kapt(libs.dagger.compiler)
+    implementation(libs.retrofit.core)
+    implementation(libs.okhttp.logging)
+    implementation(libs.moshi)
+    implementation(libs.moshi.converter)
+    implementation(libs.retrofit.kotlin.serialization)
 
     implementation(libs.androidx.test.ext)
     implementation(libs.androidx.test.espresso.core)
+}
+
+kapt {
+    correctErrorTypes true
 }
