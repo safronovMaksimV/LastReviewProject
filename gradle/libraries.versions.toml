@@ -29,6 +29,8 @@ androidxUiAutomator = "2.2.0"
 androidxWindowManager = "1.0.0"
 androidxWork = "2.7.1"
 coil = "2.2.2"
+moshi = "1.14.0"
+moshiConverter = "2.9.0"
 hilt = "2.44.2"
 hiltExt = "1.0.0"
 jacoco = "0.8.7"
@@ -98,6 +100,8 @@ androidx-work-testing = { group = "androidx.work", name = "work-testing", versio
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
+moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+moshi-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshiConverter" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
