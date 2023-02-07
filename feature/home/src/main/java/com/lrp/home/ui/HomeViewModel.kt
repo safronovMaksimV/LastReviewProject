@@ -28,6 +28,13 @@ class HomeViewModel @Inject constructor(
                     Timber.e("BODY: ${response.body()}")
                 }
             }
+
+            dogsUseCase.getAllBreeds().collect {
+                Timber.e("SOME BREED RESPONSE: $it")
+                it.map { response ->
+                    Timber.e("BREEDS: ${response.body()}")
+                }
+            }
         }
     }
 }

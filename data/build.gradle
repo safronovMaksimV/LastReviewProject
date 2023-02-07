@@ -44,8 +44,10 @@ dependencies {
     implementation(libs.junit4)
     implementation(libs.hilt.android)
     kapt(libs.dagger.compiler)
+
     implementation(libs.retrofit.core)
     implementation(libs.okhttp.logging)
+    implementation(libs.okhttp)
     implementation(libs.moshi)
     implementation(libs.moshi.converter)
     implementation(libs.retrofit.kotlin.serialization)

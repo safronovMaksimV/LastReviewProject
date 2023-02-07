@@ -1,11 +1,13 @@
 package com.lrp.data.sources
 
 import com.lrp.data.api.DogsApi
+import com.lrp.domain.enteties.BreedResponse
 import com.lrp.domain.enteties.ImageResponse
 import com.lrp.domain.utils.ResultCustomFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 
@@ -17,6 +19,11 @@ class DogsRemoteDataSourceImpl @Inject constructor(
     override suspend fun getRandomDogs() =
         ResultCustomFlow.suspended {
             dogsApi.getRandomDogPhoto()
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun getAllBreeds()=
+        ResultCustomFlow.suspended {
+            dogsApi.getAllBreeds()
         }.flowOn(Dispatchers.IO)
 
 }

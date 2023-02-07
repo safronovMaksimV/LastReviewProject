@@ -39,12 +39,20 @@ object CoreNetworkModule {
                 .addInterceptor(loggingInterceptor)
                 .build()
         } else {
-            OkHttpClient
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            OkHttpClient.Builder()
+                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .addInterceptor(loggingInterceptor)
+                .build()
+            /*OkHttpClient
                 .Builder()
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-                .build()
+                .build()*/
         }
 
     @Provides
