@@ -9,8 +9,9 @@ import retrofit2.Response
 
 interface DogsRepository {
 
-    suspend fun getRandomDog(): Flow<ResultCustomFlow<Response<ImageResponse>>>
+    suspend fun getRandomDog(): Flow<ResultCustomFlow<ImageResponse?>>
+    suspend fun getRandomDogByBreed(breed: String): Flow<ResultCustomFlow<ImageResponse?>>
 
-    suspend fun getAllBreeds(): Flow<ResultCustomFlow<Response<BreedResponse>>>
+    suspend fun getAllBreeds(): Flow<ResultCustomFlow<BreedResponse?>>
 
 }

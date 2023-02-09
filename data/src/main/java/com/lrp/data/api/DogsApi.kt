@@ -2,10 +2,9 @@ package com.lrp.data.api
 
 import com.lrp.domain.enteties.BreedResponse
 import com.lrp.domain.enteties.ImageResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface DogsApi {
     @GET("breeds/image/random/5")
@@ -13,4 +12,9 @@ interface DogsApi {
 
     @GET("breeds/list/all")
     suspend fun getAllBreeds(): Response<BreedResponse>
+
+    @GET("breed/{breed}/images/random/5")
+    suspend fun getRandomDogsByBreed(@Path("breed", encoded = true) breed: String): Response<ImageResponse>
+
+
 }

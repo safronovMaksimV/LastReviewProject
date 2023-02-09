@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface DogsRemoteDataSource {
-    suspend fun getRandomDogs(): Flow<ResultCustomFlow<Response<ImageResponse>>>
+    suspend fun getRandomDogs(): Flow<ResultCustomFlow<ImageResponse?>>
 
-    suspend fun getAllBreeds(): Flow<ResultCustomFlow<Response<BreedResponse>>>
+    suspend fun getRandomDogsByBreed(breed: String): Flow<ResultCustomFlow<ImageResponse?>>
+
+    suspend fun getAllBreeds(): Flow<ResultCustomFlow<BreedResponse?>>
 }

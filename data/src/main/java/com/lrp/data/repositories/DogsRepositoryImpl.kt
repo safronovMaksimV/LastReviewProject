@@ -15,11 +15,15 @@ import retrofit2.Response
 class DogsRepositoryImpl @Inject constructor(
     private val remoteDataSource: DogsRemoteDataSource
 ) : DogsRepository {
-    override suspend fun getRandomDog(): Flow<ResultCustomFlow<Response<ImageResponse>>> {
+    override suspend fun getRandomDog(): Flow<ResultCustomFlow<ImageResponse?>> {
         return remoteDataSource.getRandomDogs()
     }
 
-    override suspend fun getAllBreeds(): Flow<ResultCustomFlow<Response<BreedResponse>>> {
+    override suspend fun getRandomDogByBreed(breed: String): Flow<ResultCustomFlow<ImageResponse?>> {
+        return remoteDataSource.getRandomDogsByBreed(breed)
+    }
+
+    override suspend fun getAllBreeds(): Flow<ResultCustomFlow<BreedResponse?>> {
         return remoteDataSource.getAllBreeds()
     }
 }

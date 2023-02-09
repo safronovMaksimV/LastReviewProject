@@ -18,12 +18,32 @@ class DogsRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getRandomDogs() =
         ResultCustomFlow.suspended {
-            dogsApi.getRandomDogPhoto()
+            val result = dogsApi.getRandomDogPhoto()
+            if (result.isSuccessful) {
+                result.body()
+            } else {
+                ImageResponse("", emptyList())
+            }
         }.flowOn(Dispatchers.IO)
 
-    override suspend fun getAllBreeds()=
+    override suspend fun getRandomDogsByBreed(breed: String)=
         ResultCustomFlow.suspended {
-            dogsApi.getAllBreeds()
+            val result = dogsApi.getRandomDogsByBreed(breed)
+            if (result.isSuccessful) {
+                result.body()
+            } else {
+                ImageResponse("", emptyList())
+            }
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun getAllBreeds() =
+        ResultCustomFlow.suspended {
+            val result = dogsApi.getAllBreeds()
+            if (result.isSuccessful) {
+                result.body()
+            } else {
+                BreedResponse("", emptyMap())
+            }
         }.flowOn(Dispatchers.IO)
 
 }

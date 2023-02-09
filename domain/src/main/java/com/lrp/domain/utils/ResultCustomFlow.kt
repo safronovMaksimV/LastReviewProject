@@ -13,8 +13,10 @@ import kotlinx.coroutines.flow.scan
 @SuppressLint("MatchingDeclarationName")
 sealed class ResultCustomFlow<T> {
     companion object {
-        fun <T> suspended(block: suspend () -> T): Flow<ResultCustomFlow<T>> = flow {
-            emit(Loading())
+        fun <T> suspended(isLoadingNeeded: Boolean = false, block: suspend () -> T): Flow<ResultCustomFlow<T>> = flow {
+            if (isLoadingNeeded) {
+                emit(Loading())
+            }
 
             // Try to load the value.
             val terminalEvent = try {

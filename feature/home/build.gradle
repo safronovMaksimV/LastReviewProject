@@ -57,6 +57,7 @@ dependencies {
     kapt(libs.dagger.compiler)
 
     implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.coil.kt.compose)
