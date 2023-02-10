@@ -1,6 +1,4 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
-package com.lrp.home.ui.composable
+package com.lrp.search.ui.composable
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
@@ -24,12 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.lrp.base.composable.PhotoView
-import com.lrp.home.ui.HomeUiState
-import com.lrp.home.ui.HomeViewModel
+import com.lrp.search.ui.SearchUiState
+import com.lrp.search.ui.SearchViewModel
 
+@OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeView(viewModel: HomeViewModel) {
+fun SearchView(viewModel: SearchViewModel) {
     val uiState by viewModel.homeUiState.collectAsState()
     val state = rememberLazyListState()
     val isRefreshing by viewModel.refreshState.collectAsState()
@@ -39,16 +38,18 @@ fun HomeView(viewModel: HomeViewModel) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             content = {
+
                 LazyItemsView(state, uiState, pullRefreshState, isRefreshing)
             }
         )
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LazyItemsView(
     state: LazyListState,
-    uiState: HomeUiState,
+    uiState: SearchUiState,
     pullRefreshState: PullRefreshState,
     isRefreshing: Boolean
 ) {
@@ -63,7 +64,7 @@ fun LazyItemsView(
             modifier = Modifier.fillMaxSize()
         ) {
             when (uiState) {
-                is HomeUiState.Loaded -> {
+                is SearchUiState.Loaded -> {
                     items(
                         items = uiState.items,
                         itemContent = {

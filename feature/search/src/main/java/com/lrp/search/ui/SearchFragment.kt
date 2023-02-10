@@ -6,37 +6,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.lrp.base.utils.viewBinding
+import com.lrp.search.R
 import com.lrp.search.databinding.FragmentSearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SearchFragment : Fragment() {
+@AndroidEntryPoint
+class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    private var _binding: FragmentSearchBinding? = null
+    private val viewModel: SearchViewModel by viewModels()
+    private val binding by viewBinding(FragmentSearchBinding::bind)
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val searchViewModel =
-            ViewModelProvider(this)[SearchViewModel::class.java]
 
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        searchViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        with(viewModel) {
+//            observe(homeUiState, ::updateUi)
+//            observe(eventActions, ::handleEventAction)
         }
-        return root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.composeHolder.setContent {
+//            HomeView(viewModel)
+        }
     }
 }

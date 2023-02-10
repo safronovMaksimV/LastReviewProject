@@ -11,6 +11,7 @@ interface DogsRepository {
 
     suspend fun getRandomDog(): Flow<ResultCustomFlow<ImageResponse?>>
     suspend fun getRandomDogByBreed(breed: String): Flow<ResultCustomFlow<ImageResponse?>>
+    suspend fun searchDogByBreed(breed: String, resultsNumber: Int): Flow<ResultCustomFlow<ImageResponse?>>
 
     suspend fun getAllBreeds(): Flow<ResultCustomFlow<BreedResponse?>>
 

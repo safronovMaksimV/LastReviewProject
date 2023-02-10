@@ -14,7 +14,24 @@ interface DogsApi {
     suspend fun getAllBreeds(): Response<BreedResponse>
 
     @GET("breed/{breed}/images/random/5")
-    suspend fun getRandomDogsByBreed(@Path("breed", encoded = true) breed: String): Response<ImageResponse>
+    suspend fun getRandomDogsByBreed(
+        @Path(
+            "breed",
+            encoded = true
+        ) breed: String
+    ): Response<ImageResponse>
+
+    @GET("breed/{breed}/images/random/{number}")
+    suspend fun searchDogByBreed(
+        @Path(
+            "breed",
+            encoded = true
+        ) breed: String,
+        @Path(
+            "number",
+            encoded = true
+        ) numberOfResults: String,
+    ): Response<ImageResponse>
 
 
 }

@@ -36,6 +36,16 @@ class DogsRemoteDataSourceImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
 
+    override suspend fun searchDogByBreed(breed: String, resultsNumber: Int)=
+        ResultCustomFlow.suspended {
+            val result = dogsApi.searchDogByBreed(breed, resultsNumber.toString())
+            if (result.isSuccessful) {
+                result.body()
+            } else {
+                ImageResponse("", emptyList())
+            }
+        }.flowOn(Dispatchers.IO)
+
     override suspend fun getAllBreeds() =
         ResultCustomFlow.suspended {
             val result = dogsApi.getAllBreeds()

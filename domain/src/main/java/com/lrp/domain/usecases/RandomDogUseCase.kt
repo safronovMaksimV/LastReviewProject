@@ -17,6 +17,7 @@ interface DogsUseCase {
     suspend fun getRandomDog(): Flow<ResultCustomFlow<ImageResponse?>>
 
     suspend fun getRandomDogByBreed(breed: String): Flow<ResultCustomFlow<ImageResponse?>>
+    suspend fun searchDogByBreed(breed: String, resultsNumber: Int): Flow<ResultCustomFlow<ImageResponse?>>
 
     suspend fun getAllBreeds(): Flow<ResultCustomFlow<BreedResponse?>>
 }
@@ -31,6 +32,10 @@ class DogsUseCaseImpl @Inject constructor(
 
     override suspend fun getRandomDogByBreed(breed: String): Flow<ResultCustomFlow<ImageResponse?>> {
         return dogsRepository.getRandomDogByBreed(breed)
+    }
+
+    override suspend fun searchDogByBreed(breed: String, resultsNumber: Int): Flow<ResultCustomFlow<ImageResponse?>> {
+        return dogsRepository.searchDogByBreed(breed, resultsNumber)
     }
 
     override suspend fun getAllBreeds(): Flow<ResultCustomFlow<BreedResponse?>> {

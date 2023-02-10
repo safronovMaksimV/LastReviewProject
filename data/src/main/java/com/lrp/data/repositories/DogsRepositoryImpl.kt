@@ -23,6 +23,10 @@ class DogsRepositoryImpl @Inject constructor(
         return remoteDataSource.getRandomDogsByBreed(breed)
     }
 
+    override suspend fun searchDogByBreed(breed: String, resultsNumber: Int): Flow<ResultCustomFlow<ImageResponse?>> {
+        return remoteDataSource.searchDogByBreed(breed, resultsNumber)
+    }
+
     override suspend fun getAllBreeds(): Flow<ResultCustomFlow<BreedResponse?>> {
         return remoteDataSource.getAllBreeds()
     }
