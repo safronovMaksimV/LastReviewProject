@@ -2,9 +2,9 @@ package com.lrp.home.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.lrp.base.utils.observe
 import com.lrp.base.utils.viewBinding
 import com.lrp.home.R
 import com.lrp.home.databinding.FragmentHomeBinding
@@ -20,15 +20,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        with(viewModel) {
-//            observe(homeUiState, ::updateUi)
-//            observe(eventActions, ::handleEventAction)
-        }
+        configureAppBar()
 
         binding.composeHolder.setContent {
             HomeView(viewModel)
         }
+    }
+
+    private fun configureAppBar() {
+        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
     }
 }

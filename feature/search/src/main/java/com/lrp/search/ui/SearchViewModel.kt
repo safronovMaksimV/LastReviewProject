@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class SearchViewModel@Inject constructor(
+class SearchViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val dogsUseCase: DogsUseCase,
 ) : ViewModel() {
@@ -24,7 +24,7 @@ class SearchViewModel@Inject constructor(
     private val mutableHomeUiState = MutableStateFlow<SearchUiState>(SearchUiState.Loading)
     val homeUiState = mutableHomeUiState.asStateFlow()
 
-    private val mutableRefreshState = MutableStateFlow(true)
+    private val mutableRefreshState = MutableStateFlow(false)
     val refreshState = mutableRefreshState.asStateFlow()
 
     private var resultsNumber = 15
@@ -38,7 +38,13 @@ class SearchViewModel@Inject constructor(
         resultsNumber = newResultsNumber
     }
 
-    private fun fetchSearch(searchQuery: String) {
+    fun clearSearch() {
+        viewModelScope.launch(ioDispatcher) {
+            mutableHomeUiState.emit(SearchUiState.Empty)
+        }
+    }
+
+    fun fetchSearch(searchQuery: String) {
         viewModelScope.launch(ioDispatcher) {
             defaultSearchQuery = searchQuery
             dogsUseCase.searchDogByBreed(defaultSearchQuery, resultsNumber)
@@ -50,10 +56,10 @@ class SearchViewModel@Inject constructor(
                     resultList
                 }
                 .collectLatest {
-                mutableHomeUiState.emit(SearchUiState.Loaded(it))
-                delay(400)
-                mutableRefreshState.emit(false)
-            }
+                    mutableHomeUiState.emit(SearchUiState.Loaded(it))
+                    delay(400)
+                    mutableRefreshState.emit(false)
+                }
         }
     }
 }
